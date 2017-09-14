@@ -44,3 +44,4 @@ connection.query('select * from `user`', function(err, rows, fields) {
 connection.end();
     // connected! 
   // 结束会话
+ //123
