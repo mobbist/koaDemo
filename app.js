@@ -2,7 +2,6 @@ const Koa = require("koa");
 const static = require("koa-static");
 const path = require("path");
 const app = new Koa();
-
 const logger = require("./logger");
 
 //加载汇总路由
@@ -24,7 +23,24 @@ app.use(static(
   ))
 
 
+  var mysql      = require('mysql');
+  var connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : '123456',
+    database : 'test'
+  });
 
-
-app.listen(3005);
-console.log('[demo] start-quick is starting at port 3005');
+  connection.connect();
+  //查询表
+connection.query('select * from `user`', function(err, rows, fields) {
+  if (err) throw err;
+  console.log('查询结果为',rows);
+  
+  app.listen(3005);
+  console.log("success");
+});
+//关闭连接
+connection.end();
+    // connected! 
+  // 结束会话

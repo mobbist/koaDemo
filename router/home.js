@@ -2,9 +2,19 @@ const Router = require("koa-router");
 
 const home = new Router();
 
-home.get("/",(ctx)=>{
+async function abc(num){
+    return new Promise((reslove)=>{
+        setTimeout(()=>{
+            reslove(num);
+        },3000)
+    })
+}
+
+
+home.get("/",async (ctx)=>{
     //这里的事情, 相当于就是controllers完成的
-    ctx.body = "helloworld";
+    var str = await abc("515");
+    ctx.body = str;
 
 })
 
